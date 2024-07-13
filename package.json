@@ -26,9 +26,7 @@
     "webpack-dev-server": "^5.0.4",
     "webpack-merge": "^5.10.0"
   },
-  "dependencies": {
-    "date-fns": "^3.6.0"
-  },
+  "dependencies": {},
   "main": "webpack.common.js",
   "repository": {
     "type": "git",
