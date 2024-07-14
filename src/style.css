@@ -11,12 +11,25 @@
   --board-height: 50dvh;
 }
 
-.board {
-  width: var(--board-width);
-  height: var(--board-height);
+body {
   display: grid;
-  grid-template-rows: repeat(8, 1fr);
-  grid-template-columns: repeat(8, 1fr);
+  justify-content: center;
+  height: 100dvh;
+  grid-template-areas:
+    " labelY board "
+    " . labelX ";
+  grid-template-rows: auto auto;
+  grid-template-columns: auto auto;
+  align-content: center;
+}
+
+.board {
+  /* width: var(--board-width); */
+  /* height: var(--board-height); */
+  border: 2px solid black;
+  display: grid;
+  grid-template-rows: repeat(8, auto);
+  grid-template-columns: repeat(8, auto);
   grid-template-areas:
     "n70 n71 n72 n73 n74 n75 n76 n77"
     "n60 n61 n62 n63 n64 n65 n66 n67"
@@ -26,4 +39,37 @@
     "n20 n21 n22 n23 n24 n25 n26 n27"
     "n10 n11 n12 n13 n14 n15 n16 n17"
     "n00 n01 n02 n03 n04 n05 n06 n07";
+  grid-area: board;
+}
+
+.node {
+  width: 75px;
+  height: 75px;
+}
+
+.labelX {
+  display: flex;
+  grid-area: labelX;
+}
+
+.labelY {
+  grid-area: labelY;
+  display: flex;
+  flex-direction: column;
+}
+
+.labelX > .node {
+  text-align: center;
+  height: min-content;
+}
+
+.labelY > .node {
+  text-align: right;
+  line-height: 75px;
+  width: min-content;
+}
+
+.labelX > .node,
+.labelY > .node {
+  font-size: 20px;
 }
