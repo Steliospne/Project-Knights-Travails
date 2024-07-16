@@ -15,6 +15,7 @@ module.exports = function Dijkstra(Graph, source, target) {
   const dist = new Map();
   const prev = new Map();
   const Queue = new Map();
+  const visitedNodes = [];
 
   const sourceKey = `${source.x},${source.y}`;
 
@@ -47,9 +48,15 @@ module.exports = function Dijkstra(Graph, source, target) {
     const currentKey = `${currentCoordinates[0]},${currentCoordinates[1]}`;
 
     Queue.delete(currentKey);
-    current = source.setPosition(currentCoordinates[0], currentCoordinates[1]);
-    if (current.x === target.x && current.y === target.y)
-      return reconstructPath(prev, target);
+    const current = source.setPosition(
+      currentCoordinates[0],
+      currentCoordinates[1]
+    );
+
+    visitedNodes.push(currentKey[0] + currentKey[2]);
+    if (current.x === target.x && current.y === target.y) {
+      return [visitedNodes, reconstructPath(prev, target)];
+    }
 
     for (let move of current.possibleMoves) {
       let moveKey = `${move[0]},${move[1]}`;
