@@ -1,9 +1,38 @@
-const Board = require("./board");
+const Board = require("./board.js");
+const Knight = require("./knight.js");
+
+const mouseAnimation = require("./buttonAnimation.js");
 
 module.exports = class DOM {
-  static init() {
-    const boardContainer = document.createElement("div");
-    boardContainer.className = "board";
+  static animationInterval;
+  static target;
+  static shortestPath;
+  static visitedNodes = [];
+
+  static header() {
+    const header = document.createElement("div");
+    header.className = "header";
+    header.textContent = "Knight Travails";
+
+    document.body.append(header);
+  }
+
+  static footer() {}
+
+  static initMain() {
+    const main = document.createElement("div");
+    main.className = "main";
+
+    document.body.append(main);
+  }
+
+  static initBoard() {
+    document.querySelector(".main").innerHTML = "";
+    const boardWrapper = document.createElement("div");
+    boardWrapper.className = "boardWrapper";
+
+    const board = document.createElement("div");
+    board.className = "board";
 
     const labelXcontainer = document.createElement("div");
     labelXcontainer.className = "labelX";
