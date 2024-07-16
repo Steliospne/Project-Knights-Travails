@@ -166,10 +166,10 @@ module.exports = class DOM {
 
     document.getElementsByClassName("00")[0].innerHTML = ''
 
-    const startX = +inputStart.value[1];
-    const startY = +inputStart.value[0];
-    const targetX = +inputTarget.value[1];
-    const targetY = +inputTarget.value[0];
+    const startX = +inputStart.value[0];
+    const startY = +inputStart.value[1];
+    const targetX = +inputTarget.value[0];
+    const targetY = +inputTarget.value[1];
 
     if (
       !(
@@ -235,7 +235,7 @@ module.exports = class DOM {
           )[0];
           currentTile.style.backgroundColor = "purple";
           currentTile.textContent =
-            `Step${DOM.shortestPath.indexOf(tile)}\n` + "[" + tile + "]";
+            `Step${DOM.shortestPath.indexOf(tile)}\n [${tile[1]},${tile[0]}]`;
           currentTile.style.fontSize = "26";
           currentTile.style.color = "white";
           currentTile.style.display = "flex";
@@ -249,6 +249,7 @@ module.exports = class DOM {
           }`
         )[0];
         const knightEl = DOM.knightIcon(endNode);
+        endNode.innerHTML = '' 
         endNode.style.backgroundColor = "red";
         knightEl.textContent =
           "End \n" + "[" + DOM.shortestPath[DOM.shortestPath.length - 1] + "]";
