@@ -65,6 +65,13 @@ body {
   grid-area: board;
 }
 
+.knight {
+  width: 100%;
+  height: 100%;
+  background-image: url("./assets/icons/knight.svg");
+  background-size: cover;
+}
+
 .node {
   width: 75px;
   height: 75px;
