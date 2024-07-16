@@ -156,6 +156,50 @@ module.exports = class DOM {
     mouseAnimation();
   }
 
+  static start() {
+    const inputTarget = document.getElementById("target");
+    const inputStart = document.getElementById("start");
+    if (inputTarget.value.length < 2 || inputStart.value.length < 2)
+      return alert("Input too short min 2 points");
+    DOM.initBoard();
+    DOM.initUI();
+
+    document.getElementsByClassName("00")[0].innerHTML = ''
+
+    const startX = +inputStart.value[1];
+    const startY = +inputStart.value[0];
+    const targetX = +inputTarget.value[1];
+    const targetY = +inputTarget.value[0];
+
+    if (
+      !(
+        Number.isInteger(startX) &&
+        Number.isInteger(startY) &&
+        Number.isInteger(targetX) &&
+        Number.isInteger(targetY)
+      )
+    )
+      return alert("Invalid input must be 2 numbers each 0-7");
+    const startNode = document.getElementsByClassName(`${startX}${startY}`)[0];
+    startNode.style.backgroundColor = "green";
+    startNode.append(DOM.knightIcon(startNode))
+
+    const knight = new Knight(startX, startY);
+    const target = Board.cells[targetX][targetY];
+
+    [DOM.visitedNodes, DOM.shortestPath] = knight.moveKnight(knight, target);
+
+    DOM.animatePath();
+  }
+
+  static stop() {
+    window.clearInterval(DOM.animationInterval);
+
+    DOM.initBoard();
+    DOM.initUI();
+    return;
+  }
+
   static animatePath() {
     let index = 1;
     DOM.animationInterval = setInterval(() => {
