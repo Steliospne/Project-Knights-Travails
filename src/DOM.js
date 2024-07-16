@@ -40,7 +40,8 @@ module.exports = class DOM {
     const labelYcontainer = document.createElement("div");
     labelYcontainer.className = "labelY";
 
-    document.body.append(boardContainer, labelXcontainer, labelYcontainer);
+    document.querySelector(".main").append(boardWrapper);
+    boardWrapper.append(board, labelXcontainer, labelYcontainer);
 
     Board.cells.forEach((row) => {
       row.forEach((node) => {
@@ -48,7 +49,7 @@ module.exports = class DOM {
         tile.className = "node " + node.x + node.y;
         // tile.textContent = node.x + " " + node.y;
         tile.style.gridArea = "n" + node.x + "" + node.y;
-        boardContainer.prepend(tile);
+        board.prepend(tile);
 
         if (node.x % 2 == 0) {
           if (node.y % 2 == 0) {
