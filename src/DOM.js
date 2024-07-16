@@ -71,5 +71,20 @@ module.exports = class DOM {
       labelXcontainer.append(numberX);
       labelYcontainer.prepend(numberY);
     }
+
+    const node00 = document.getElementsByClassName("00")[0];
+    node00.append(DOM.knightIcon(node00));
+  }
+
+  static knightIcon(parent) {
+    const knightEl = document.createElement("div");
+    knightEl.className = "knight";
+
+    if (parent.style.backgroundColor == "black") {
+      knightEl.style.filter = "invert(1)";
+    }
+    return knightEl;
+  }
+
   }
 };
