@@ -1,11 +1,12 @@
-import './style.css'
+import "./style.css";
 
-const Board = require('./board.js');
-const DOM = require('./DOM.js');
-const Knight = require('./knight.js');
+const Board = require("./board.js");
+const DOM = require("./DOM.js");
 
-Board.init()
-DOM.init()
-const knight = new Knight(0,0)
-const target = Board.cells[7][7];
-console.log(knight.moveKnight(knight ,target));
+window.onload = () => {
+  Board.init();
+  DOM.header();
+  DOM.initMain();
+  DOM.initBoard();
+  DOM.initUI();
+};
