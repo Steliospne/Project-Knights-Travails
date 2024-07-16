@@ -156,5 +156,67 @@ module.exports = class DOM {
     mouseAnimation();
   }
 
+  static animatePath() {
+    let index = 1;
+    DOM.animationInterval = setInterval(() => {
+      if (index < DOM.visitedNodes.length) {
+        const currentTile = document.getElementsByClassName(
+          `${DOM.visitedNodes[index]}`
+        )[0];
+        currentTile.style.backgroundColor = "yellow";
+        index++;
+      } else {
+        window.clearInterval(DOM.animationInterval);
+
+        const startNode = document.getElementsByClassName(
+          `${
+            DOM.shortestPath[0].toString()[0] +
+            DOM.shortestPath[0].toString()[2]
+          }`
+        )[0];
+        startNode.style.backgroundColor = "green";
+        startNode.textContent = "Start\n" + "[" + DOM.shortestPath[0] + "]";
+        startNode.style.fontSize = "26";
+        startNode.style.color = "white";
+        startNode.style.display = "flex";
+        startNode.style.justifyContent = "center";
+        startNode.style.alignItems = "center";
+
+        for (const tile of DOM.shortestPath.slice(
+          1,
+          DOM.shortestPath.length - 1
+        )) {
+          const currentTile = document.getElementsByClassName(
+            `${tile.toString()[0] + tile.toString()[2]}`
+          )[0];
+          currentTile.style.backgroundColor = "purple";
+          currentTile.textContent =
+            `Step${DOM.shortestPath.indexOf(tile)}\n` + "[" + tile + "]";
+          currentTile.style.fontSize = "26";
+          currentTile.style.color = "white";
+          currentTile.style.display = "flex";
+          currentTile.style.justifyContent = "center";
+          currentTile.style.alignItems = "center";
+        }
+        const endNode = document.getElementsByClassName(
+          `${
+            DOM.shortestPath[DOM.shortestPath.length - 1].toString()[0] +
+            DOM.shortestPath[DOM.shortestPath.length - 1].toString()[2]
+          }`
+        )[0];
+        const knightEl = DOM.knightIcon(endNode);
+        endNode.style.backgroundColor = "red";
+        knightEl.textContent =
+          "End \n" + "[" + DOM.shortestPath[DOM.shortestPath.length - 1] + "]";
+        endNode.style.fontSize = "26";
+        endNode.style.color = "white";
+        knightEl.style.display = "flex";
+        knightEl.style.justifyContent = "center";
+        knightEl.style.alignItems = "center";
+        endNode.append(knightEl);
+
+        document.querySelector(".stop > a").textContent = "Clear";
+      }
+    }, 100);
   }
 };
